@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     getHomeData();
-  }, []);
+  }, [getHomeData]);
 
   return (
     <div className="App">
