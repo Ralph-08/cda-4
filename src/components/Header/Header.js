@@ -11,7 +11,7 @@ function Header() {
             "header__nav-link" + (isActive ? " header__nav-link--active" : "")
           }
         >
-          Home
+          Ordenar
         </NavLink>
         <NavLink
           to="/warehouses"
@@ -19,7 +19,7 @@ function Header() {
             "header__nav-link" + (isActive ? " header__nav-link--active" : "")
           }
         >
-          Warehouses
+          Ordenes
         </NavLink>
         <NavLink
           to="/inventory"
@@ -27,7 +27,7 @@ function Header() {
             "header__nav-link" + (isActive ? " header__nav-link--active" : "")
           }
         >
-          Inventory
+          Historial
         </NavLink>
       </nav>
     </header>
