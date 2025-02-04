@@ -78,9 +78,13 @@ const TacoQuestion = ({ handleNextPage }) => {
         </button>
       </section>
 
-      <button className="survey__next" onClick={verifyNotes}>
-        SIGUIENTE
-      </button>
+      {quantity >= 1 ? (
+        <button className="survey__next" onClick={verifyNotes}>
+          SIGUIENTE
+        </button>
+      ) : (
+        ""
+      )}
     </section>
   );
 };

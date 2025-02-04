@@ -4,6 +4,7 @@ import Warehouse from "./pages/Warehouse";
 import Inventory from "./pages/Inventory";
 import Home from "./pages/Home/Home";
 import "./App.scss";
+import Orders from "./pages/Orders/Orders";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         {/* <Header /> */}
         <Routes>
           <Route path={"/"} element={<Home />} />
+          <Route path={"/ordenes"} element={<Orders />} />
           <Route path={"warehouses"} element={<Warehouse />} />
           <Route path={"inventory"} element={<Inventory />} />
         </Routes>
