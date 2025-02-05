@@ -13,6 +13,7 @@ const CustomerInfo = ({
 }) => {
   const [inputError, setInputError] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Add a state to track submission status
 
   const ordersCollectionRef = collection(db, "orders");
 
@@ -21,6 +22,10 @@ const CustomerInfo = ({
   };
 
   const handleSubmit = async () => {
+    if (isSubmitting) return; // Prevent multiple submissions
+
+    setIsSubmitting(true); // Set the flag to true to indicate submission in progress
+
     console.log(orderInfo);
     await addDoc(ordersCollectionRef, orderInfo);
 
