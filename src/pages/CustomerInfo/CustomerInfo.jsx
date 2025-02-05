@@ -30,7 +30,7 @@ const CustomerInfo = ({ handleBackPage, handleNextPage }) => {
 
   return (
     <section className="info">
-      <section className="info__header">
+      <section className={!submitSuccess?"info__header":"info__header info__header--success"}>
         {!submitSuccess && (
           <>
             <img
