@@ -15,9 +15,9 @@ const Home = () => {
 
   // console.log(orderInfo);
 
-  const printOrder = () => {
-    console.log(orderInfo);
-  };
+  // const printOrder = () => {
+  //   console.log(orderInfo);
+  // };
 
   const gatherAllInfo = (name) => {
     setOrderInfo({ ...orderInfo, name: name });

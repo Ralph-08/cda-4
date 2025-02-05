@@ -42,7 +42,7 @@ const TacoQuestion = ({ handleNextPage }) => {
   return (
     <section className={!fadeOut ? "survey" : "survey survey--fadeOut"}>
       <h1 className="survey__question">CUANTOS TACOS?</h1>
-      <img src={tacosImage} className="survey__image" />
+      <img src={tacosImage} className="survey__image" alt="taco" />
       <Counter quantity={quantity} setQuantity={setQuantity} />
 
       <section className="survey__options">
