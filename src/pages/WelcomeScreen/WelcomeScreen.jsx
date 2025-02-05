@@ -13,8 +13,8 @@ function WelcomeScreen({ setWelcomeScreen, setScreenOne }) {
     }, 1000);
   };
   return (
-    <section className={fadeOut?"welcome--fade-out":"welcome"}>
-      <h1 className="welcome__header">Bienvendo a los tacos sabrosos!</h1>
+    <section className={fadeOut ? "welcome--fade-out" : "welcome"}>
+      <h1 className="welcome__header">Bienvenido a los tacos sabrosos!</h1>
       <button className="welcome__button" onClick={handleNextPage}>
         EMPEZAR
       </button>

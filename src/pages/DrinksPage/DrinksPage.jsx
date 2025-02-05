@@ -82,11 +82,13 @@ const DrinksPage = ({ handleNextPage, handleBackPage }) => {
       <section className="bottom-container"></section>
 
       <section className="survey__next-container">
-        <button className="survey__next survey__next--float" onClick={""}>
+        <button
+          className="survey__next survey__next--float"
+          onClick={handleNextPage}
+        >
           SIGUIENTE
         </button>
       </section>
-
     </section>
   );
 };

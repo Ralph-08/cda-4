@@ -3,24 +3,34 @@ import "./Home.scss";
 import TacoQuestion from "../TacoQuestion/TacoQuestion";
 import WelcomeScreen from "../WelcomeScreen/WelcomeScreen";
 import DrinksPage from "../DrinksPage/DrinksPage";
+import CustomerInfo from "../CustomerInfo/CustomerInfo";
 
 const Home = () => {
   const [welcomeScreen, setWelcomeScreen] = useState(true);
   const [screenOne, setScreenOne] = useState(false);
   const [screenTwo, setScreenTwo] = useState(false);
+  const [screenThree, setScreenThree] = useState(false);
 
-  const handleNextPage = (notesList, quantity) => {
+  const handleNextPageToTwo = (notesList, quantity) => {
     console.log({ tacoQuantity: quantity, notes: notesList });
 
     setScreenOne(false);
     setScreenTwo(true);
   };
 
-  const handleNextPageToThree = () => {};
+  const handleNextPageToThree = () => {
+    setScreenTwo(false);
+    setScreenThree(true);
+  };
 
   const handleBackFromPageTwo = () => {
     setScreenTwo(false);
     setScreenOne(true);
+  };
+
+  const handleBackFromPageThree = () => {
+    setScreenThree(false);
+    setScreenTwo(true);
   };
 
   return (
@@ -31,11 +41,17 @@ const Home = () => {
           setScreenOne={setScreenOne}
         />
       )}
-      {screenOne && <TacoQuestion handleNextPage={handleNextPage} />}
+      {screenOne && <TacoQuestion handleNextPage={handleNextPageToTwo} />}
       {screenTwo && (
         <DrinksPage
           handleNextPage={handleNextPageToThree}
           handleBackPage={handleBackFromPageTwo}
+        />
+      )}
+      {screenThree && (
+        <CustomerInfo
+          handleNextPage={""}
+          handleBackPage={handleBackFromPageThree}
         />
       )}
     </section>

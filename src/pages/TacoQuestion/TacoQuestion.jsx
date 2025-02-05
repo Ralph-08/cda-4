@@ -77,7 +77,7 @@ const TacoQuestion = ({ handleNextPage }) => {
           }`}
           onClick={() => addNote("alado")}
         >
-          Condimentos a lado
+          Verduras a lado
         </button>
       </section>
 
