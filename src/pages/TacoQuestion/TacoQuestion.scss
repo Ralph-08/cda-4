@@ -1,0 +1,86 @@
+@keyframes opacityIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.survey {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  animation: opacityIn 1s;
+  height: 100vh;
+
+  &--fadeOut {
+    animation: fadeOut 0.5s;
+  }
+
+  &__question {
+    font-size: 2rem;
+  }
+
+  &__image {
+    width: 50%;
+    border-radius: 20rem;
+    max-width: 500px;
+  }
+
+  &__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: 25rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+
+    .options__button {
+      border-style: none;
+      width: 10rem;
+      height: 4rem;
+      background-color: white;
+      border: 1.5px solid #369cde;
+      border-radius: 10px;
+      color: #369cde;
+      font-size: 1rem;
+      font-weight: bold;
+      opacity: 0.6;
+
+      &--active {
+        background-color: #369cde;
+        color: white;
+        animation: opacityIn 0.5s;
+        opacity: 1;
+      }
+    }
+  }
+
+  &__next {
+    border-style: none;
+    font-size: 1.2rem;
+    background-color: rgb(2, 194, 53);
+    color: white;
+    padding: 0.7rem;
+    width: 335px;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    animation: opacityIn 0.5s;
+  }
+
+  &__placeholder {
+    height: 44.39px;
+    margin-bottom: 2rem;
+  }
+}

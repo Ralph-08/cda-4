@@ -1,0 +1,29 @@
+.order {
+    // border: 1px solid;
+    padding: 2rem 1rem;
+    border-top: 4px solid darkgray;
+
+    &--gray {
+        background-color: lightgray;
+    }
+
+    &__name {
+        font-size: 1.8rem;
+        margin-top: 0.5rem;
+    }
+
+    &__qty {
+        font-size: 1.3rem;
+        margin-bottom: .5rem;
+    }
+
+    &__subhead {
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+        padding-left: 1rem
+    }
+
+    &__list {
+        margin-top: 0.5rem;
+    }
+}
