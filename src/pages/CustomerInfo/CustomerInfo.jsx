@@ -28,9 +28,9 @@ const CustomerInfo = ({
       setSubmitSuccess(true);
     }, 100);
 
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 4500);
+    setTimeout(() => {
+      window.location.reload();
+    }, 4500);
   };
 
   const verifyForm = (e) => {
