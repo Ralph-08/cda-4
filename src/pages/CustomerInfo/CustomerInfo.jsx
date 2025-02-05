@@ -31,13 +31,17 @@ const CustomerInfo = ({ handleBackPage, handleNextPage }) => {
   return (
     <section className="info">
       <section className="info__header">
-        <img
-          className="drinks__backIcon"
-          src={backIcon}
-          alt="back"
-          onClick={handleBackPage}
-        />
-        <h1 className="drinks__text">INFORMACION</h1>
+        {!submitSuccess && (
+          <>
+            <img
+              className="drinks__backIcon"
+              src={backIcon}
+              alt="back"
+              onClick={handleBackPage}
+            />
+            <h1 className="drinks__text">INFORMACION</h1>
+          </>
+        )}
       </section>
 
       {!submitSuccess && (
