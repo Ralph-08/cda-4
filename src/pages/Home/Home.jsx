@@ -11,14 +11,34 @@ const Home = () => {
   const [screenTwo, setScreenTwo] = useState(false);
   const [screenThree, setScreenThree] = useState(false);
 
+  const [orderInfo, setOrderInfo] = useState({});
+
+  // console.log(orderInfo);
+
+  const printOrder = () => {
+    console.log(orderInfo);
+  };
+
+  const gatherAllInfo = (name) => {
+    setOrderInfo({ ...orderInfo, name: name });
+    // printOrder();
+    // console.log(orderInfo);
+  };
+
   const handleNextPageToTwo = (notesList, quantity) => {
-    console.log({ tacoQuantity: quantity, notes: notesList });
+    setOrderInfo({ ...orderInfo, tacoQuantity: quantity, notes: notesList });
+
+    console.log(orderInfo);
 
     setScreenOne(false);
     setScreenTwo(true);
   };
 
-  const handleNextPageToThree = () => {
+  const handleNextPageToThree = (drinksList) => {
+    setOrderInfo({ ...orderInfo, drinksList });
+
+    console.log(orderInfo);
+
     setScreenTwo(false);
     setScreenThree(true);
   };
@@ -52,6 +72,8 @@ const Home = () => {
         <CustomerInfo
           handleNextPage={""}
           handleBackPage={handleBackFromPageThree}
+          gatherAllInfo={gatherAllInfo}
+          orderInfo={orderInfo}
         />
       )}
     </section>

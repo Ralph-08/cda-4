@@ -13,6 +13,17 @@ const DrinksPage = ({ handleNextPage, handleBackPage }) => {
   const [cokeQuantity, setCokeQuantity] = useState(0);
   const [spriteQuantity, setSpriteQuantity] = useState(0);
 
+  const verifyDrinks = () => {
+    const drinks = [
+      horchataQunatity ? { horchata: horchataQunatity } : null,
+      jamaicaQuantity ? { jamaica: jamaicaQuantity } : null,
+      cokeQuantity ? { coke: cokeQuantity } : null,
+      spriteQuantity ? { sprite: spriteQuantity } : null,
+    ];
+
+    handleNextPage(drinks.filter((drink) => drink));
+  };
+
   return (
     <section className="drinks">
       <section className="drinks__header">
@@ -84,7 +95,7 @@ const DrinksPage = ({ handleNextPage, handleBackPage }) => {
       <section className="survey__next-container">
         <button
           className="survey__next survey__next--float"
-          onClick={handleNextPage}
+          onClick={verifyDrinks}
         >
           SIGUIENTE
         </button>

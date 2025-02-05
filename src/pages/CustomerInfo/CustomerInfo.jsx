@@ -3,16 +3,34 @@ import "./CustomerInfo.scss";
 import backIcon from "../../assets/icons/back-arrow.svg";
 import walkingTaco from "../../assets/images/walking-taco.gif";
 
-const CustomerInfo = ({ handleBackPage, handleNextPage }) => {
+import { db } from "../../firebase-config";
+import { collection, addDoc } from "firebase/firestore";
+
+const CustomerInfo = ({
+  handleBackPage,
+  gatherAllInfo,
+  orderInfo,
+}) => {
   const [inputError, setInputError] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const handleSubmit = (name) => {
-    setSubmitSuccess(true);
+  const ordersCollectionRef = collection(db, "orders");
+
+  const handleNameChange = (e) => {
+    gatherAllInfo(e.target.value);
+  };
+
+  const handleSubmit = async () => {
+    console.log(orderInfo);
+    await addDoc(ordersCollectionRef, orderInfo);
 
     setTimeout(() => {
-      window.location.reload();
-    }, 4500);
+      setSubmitSuccess(true);
+    }, 100);
+
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 4500);
   };
 
   const verifyForm = (e) => {
@@ -23,14 +41,22 @@ const CustomerInfo = ({ handleBackPage, handleNextPage }) => {
       return;
     }
 
+    gatherAllInfo(e.target.name.value);
+
     setInputError(false);
+
+    // console.log(name);
 
     handleSubmit(e.target.name.value);
   };
 
   return (
     <section className="info">
-      <section className={!submitSuccess?"info__header":"info__header info__header--success"}>
+      <section
+        className={
+          !submitSuccess ? "info__header" : "info__header info__header--success"
+        }
+      >
         {!submitSuccess && (
           <>
             <img
@@ -56,8 +82,11 @@ const CustomerInfo = ({ handleBackPage, handleNextPage }) => {
               }
               type="text"
               name="name"
+              onChange={handleNameChange}
             />
-            <button className="questionare__button">ENTREGAR</button>
+            <button className="questionare__button" onClick={handleSubmit}>
+              ENTREGAR
+            </button>
           </form>
         </section>
       )}
