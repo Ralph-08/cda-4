@@ -1,29 +1,38 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .order {
-    // border: 1px solid;
-    padding: 2rem 1rem;
-    border-top: 4px solid darkgray;
+  padding: 2rem 1rem;
+  border-bottom: 2px solid rgb(209, 209, 209);
+  animation: fadeIn 0.2s;
 
-    &--gray {
-        background-color: lightgray;
-    }
+  &--gray {
+    background-color: lightgray;
+  }
 
-    &__name {
-        font-size: 1.8rem;
-        margin-top: 0.5rem;
-    }
+  &__name {
+    font-size: 1.8rem;
+    margin-top: 0.5rem;
+  }
 
-    &__qty {
-        font-size: 1.3rem;
-        margin-bottom: .5rem;
-    }
+  &__qty {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
 
-    &__subhead {
-        margin-top: 0.5rem;
-        margin-bottom: 0;
-        padding-left: 1rem
-    }
+  &__subhead {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    padding-left: 1rem;
+  }
 
-    &__list {
-        margin-top: 0.5rem;
-    }
+  &__list {
+    margin-top: 0.5rem;
+  }
 }
