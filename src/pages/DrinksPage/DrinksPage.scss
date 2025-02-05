@@ -10,7 +10,6 @@
 .drinks {
   width: 100%;
   animation: fadeIn 0.5s;
-  padding-bottom: 4rem;
 
   &__header {
     background-color: #369cde;
@@ -69,16 +68,17 @@
 
   .survey__next-container {
     position: sticky;
-    bottom: 2rem;
+    bottom: 1rem;
     display: flex;
     justify-content: center;
   }
 
   .survey__next--float {
-    // position: sticky;
-    // bottom: 2rem;
     margin: 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    // transform: translateX(50%);
+  }
+
+  .bottom-container {
+    height: 5rem;
   }
 }
