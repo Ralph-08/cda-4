@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "./Orders.scss";
 import { db } from "../../firebase-config";
 import { collection, getDocs } from "firebase/firestore";
@@ -8,23 +8,21 @@ function Orders() {
   const [orders, setOrders] = useState([]);
   const ordersCollectionRef = collection(db, "orders");
 
-  const getOrders = async () => {
+  const getOrders = useCallback(async () => {
     const data = await getDocs(ordersCollectionRef);
     setOrders(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     console.log(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
+  }, [ordersCollectionRef]);
 
   useEffect(() => {
     getOrders();
-  }, []);
+  }, [getOrders]);
 
   return (
     <section>
       <h1>Ordenes</h1>
       {orders.map((order, i) => {
-        return (
-            <OrderCard order={order} key={i} index={i} />
-        );
+        return <OrderCard order={order} key={i} index={i} />;
       })}
     </section>
   );
