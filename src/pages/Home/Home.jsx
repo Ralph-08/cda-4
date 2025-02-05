@@ -12,17 +12,32 @@ const Home = () => {
   const handleNextPage = (notesList, quantity) => {
     console.log({ tacoQuantity: quantity, notes: notesList });
 
-    
-
     setScreenOne(false);
-    setScreenTwo(true)
+    setScreenTwo(true);
+  };
+
+  const handleNextPageToThree = () => {};
+
+  const handleBackFromPageTwo = () => {
+    setScreenTwo(false);
+    setScreenOne(true);
   };
 
   return (
     <section className="home">
-      {welcomeScreen && <WelcomeScreen setWelcomeScreen={setWelcomeScreen} setScreenOne={setScreenOne} />}
+      {welcomeScreen && (
+        <WelcomeScreen
+          setWelcomeScreen={setWelcomeScreen}
+          setScreenOne={setScreenOne}
+        />
+      )}
       {screenOne && <TacoQuestion handleNextPage={handleNextPage} />}
-      {screenTwo && <DrinksPage />}
+      {screenTwo && (
+        <DrinksPage
+          handleNextPage={handleNextPageToThree}
+          handleBackPage={handleBackFromPageTwo}
+        />
+      )}
     </section>
   );
 };

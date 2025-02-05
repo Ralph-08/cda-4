@@ -5,7 +5,7 @@ import Counter from "../../components/Counter/Counter";
 
 const TacoQuestion = ({ handleNextPage }) => {
   const [quantity, setQuantity] = useState(0);
-
+  const [fadeOut, setFadeOut] = useState(false);
   const [pineapple, setPineapple] = useState(false);
   const [cebolla, setCebolla] = useState(false);
   const [cilantro, setCilantro] = useState(false);
@@ -33,11 +33,14 @@ const TacoQuestion = ({ handleNextPage }) => {
 
     const addedItems = noteList.filter((i) => i);
 
-    handleNextPage(addedItems, quantity);
+    setFadeOut(true);
+    setTimeout(() => {
+      handleNextPage(addedItems, quantity);
+    }, 500);
   };
 
   return (
-    <section className="survey">
+    <section className={!fadeOut ? "survey" : "survey survey--fadeOut"}>
       <h1 className="survey__question">CUANTOS TACOS?</h1>
       <img src={tacosImage} className="survey__image" />
       <Counter quantity={quantity} setQuantity={setQuantity} />
@@ -83,7 +86,7 @@ const TacoQuestion = ({ handleNextPage }) => {
           SIGUIENTE
         </button>
       ) : (
-        ""
+        <section className="survey__placeholder"></section>
       )}
     </section>
   );

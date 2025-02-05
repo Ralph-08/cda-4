@@ -1,24 +1,29 @@
 import Counter from "../../components/Counter/Counter";
 import "./DrinksPage.scss";
-
 import horchataImg from "../../assets/images/horchata.png";
 import jamaicaImg from "../../assets/images/jamaica.webp";
 import cokeImg from "../../assets/images/coke.webp";
 import spriteImg from "../../assets/images/sprite.png";
+import backIcon from "../../assets/icons/back-arrow.svg";
 import { useState } from "react";
 
-
-
-const DrinksPage = () => {
-
-    const [horchataQunatity, setHorchataQuantity] = useState(0);
-    const [jamaicaQuantity, setJamaicaQuantity] = useState(0);
-    const [cokeQuantity, setCokeQuantity] = useState(0);
-    const [spriteQuantity, setSpriteQuantity] = useState(0);
+const DrinksPage = ({ handleNextPage, handleBackPage }) => {
+  const [horchataQunatity, setHorchataQuantity] = useState(0);
+  const [jamaicaQuantity, setJamaicaQuantity] = useState(0);
+  const [cokeQuantity, setCokeQuantity] = useState(0);
+  const [spriteQuantity, setSpriteQuantity] = useState(0);
 
   return (
     <section className="drinks">
-      <h1 className="drinks__header">BEBIDAS</h1>
+      <section className="drinks__header">
+        <img
+          className="drinks__backIcon"
+          src={backIcon}
+          alt="back"
+          onClick={handleBackPage}
+        />
+        <h1 className="drinks__text">BEBIDAS</h1>
+      </section>
 
       <ul className="drinks__list">
         <li className="drinks__item">
@@ -28,7 +33,10 @@ const DrinksPage = () => {
           </section>
           <section className="item__right">
             <p className="item__price"></p>
-            <Counter quantity={horchataQunatity} setQuantity={setHorchataQuantity} />
+            <Counter
+              quantity={horchataQunatity}
+              setQuantity={setHorchataQuantity}
+            />
           </section>
         </li>
 
@@ -39,7 +47,10 @@ const DrinksPage = () => {
           </section>
           <section className="item__right">
             <p className="item__price"></p>
-            <Counter quantity={jamaicaQuantity} setQuantity={setJamaicaQuantity} />
+            <Counter
+              quantity={jamaicaQuantity}
+              setQuantity={setJamaicaQuantity}
+            />
           </section>
         </li>
 
@@ -61,10 +72,19 @@ const DrinksPage = () => {
           </section>
           <section className="item__right">
             <p className="item__price"></p>
-            <Counter quantity={spriteQuantity} setQuantity={setSpriteQuantity} />
+            <Counter
+              quantity={spriteQuantity}
+              setQuantity={setSpriteQuantity}
+            />
           </section>
         </li>
       </ul>
+
+      <section className="survey__next-container">
+        <button className="survey__next survey__next--float" onClick={""}>
+          SIGUIENTE
+        </button>
+      </section>
     </section>
   );
 };

@@ -7,20 +7,33 @@
   }
 }
 
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .survey {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100%;
+  justify-content: space-around;
   animation: opacityIn 1s;
+  height: 100vh;
+
+  &--fadeOut {
+    animation: fadeOut 0.5s;
+  }
 
   &__question {
     font-size: 2rem;
   }
 
   &__image {
-    width: 90%;
+    width: 50%;
     border-radius: 20rem;
     max-width: 500px;
   }
@@ -64,5 +77,10 @@
     border-radius: 15px;
     margin-bottom: 2rem;
     animation: opacityIn 0.5s;
+  }
+
+  &__placeholder {
+    height: 44.39px;
+    margin-bottom: 2rem;
   }
 }
