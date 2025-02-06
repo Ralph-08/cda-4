@@ -36,7 +36,7 @@
   height: 100vh;
   background: url("../../assets/images/trompo.jpg") center/cover no-repeat,
     rgba(0, 0, 0, 0.3);
-  background-blend-mode: multiply; /* Try overlay, screen, etc. */
+  background-blend-mode: multiply;
   width: 100%;
   background-size: cover;
   background-position: center;
@@ -56,7 +56,7 @@
     font-family: "Helvetica";
     background: url("../../assets/images/trompo.jpg") center/cover no-repeat,
       rgba(0, 0, 0, 0.3);
-    background-blend-mode: multiply; /* Try overlay, screen, etc. */
+    background-blend-mode: multiply;
     animation: fadeOut 1s;
   }
 

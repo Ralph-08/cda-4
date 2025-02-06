@@ -4,7 +4,7 @@ import { db } from "../../firebase-config";
 import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 import OrderCard from "../../components/OrderCard/OrderCard";
 
-function Orders() {
+const Orders = () => {
   const [orders, setOrders] = useState([]);
   const ordersCollectionRef = collection(db, "orders");
 
@@ -45,6 +45,6 @@ function Orders() {
       </section>
     </>
   );
-}
+};
 
 export default Orders;

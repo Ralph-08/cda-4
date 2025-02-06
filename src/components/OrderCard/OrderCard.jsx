@@ -20,6 +20,14 @@ const OrderCard = ({
     }, 350);
   };
 
+  const handleFinalizeOrderButtonClick = () => {
+    setCardCollapse(true);
+
+    setTimeout(() => {
+      handleFinalizeOrder(order.id);
+    }, 350);
+  };
+
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     return date.toLocaleString("en-US", {
@@ -123,7 +131,7 @@ const OrderCard = ({
             <>
               <button
                 className="order__button order__button--coral"
-                onClick={() => handleFinalizeOrder(order.id)}
+                onClick={handleFinalizeOrderButtonClick}
               >
                 Finalizar
               </button>
