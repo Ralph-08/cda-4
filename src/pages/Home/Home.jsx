@@ -11,34 +11,23 @@ const Home = () => {
   const [screenTwo, setScreenTwo] = useState(false);
   const [screenThree, setScreenThree] = useState(false);
 
-  const [orderInfo, setOrderInfo] = useState({});
-
-  // console.log(orderInfo);
-
-  // const printOrder = () => {
-  //   console.log(orderInfo);
-  // };
+  const [orderInfo, setOrderInfo] = useState({
+    activeOrder: true,
+    orderDelivered: false,
+  });
 
   const gatherAllInfo = (name) => {
     setOrderInfo({ ...orderInfo, name: name });
-    // printOrder();
-    // console.log(orderInfo);
   };
 
   const handleNextPageToTwo = (notesList, quantity) => {
     setOrderInfo({ ...orderInfo, tacoQuantity: quantity, notes: notesList });
-
-    console.log(orderInfo);
-
     setScreenOne(false);
     setScreenTwo(true);
   };
 
   const handleNextPageToThree = (drinksList) => {
     setOrderInfo({ ...orderInfo, drinksList });
-
-    console.log(orderInfo);
-
     setScreenTwo(false);
     setScreenThree(true);
   };
