@@ -1,0 +1,23 @@
+.server-page {
+  &__header {
+    font-size: 24px;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #369cde;
+    color: white;
+    position: sticky;
+    top: 0;
+  }
+
+  &__link {
+    color: white;
+    text-decoration: none;
+    background-color: rgb(2, 194, 53);
+    font-size: 1rem;
+    padding: 0.3rem 0.5rem;
+    border-radius: 0.5rem;
+  }
+}

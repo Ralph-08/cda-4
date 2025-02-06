@@ -6,11 +6,7 @@ import walkingTaco from "../../assets/images/walking-taco.gif";
 import { db } from "../../firebase-config";
 import { collection, addDoc } from "firebase/firestore";
 
-const CustomerInfo = ({
-  handleBackPage,
-  gatherAllInfo,
-  orderInfo,
-}) => {
+const CustomerInfo = ({ handleBackPage, gatherAllInfo, orderInfo }) => {
   const [inputError, setInputError] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false); // Add a state to track submission status
@@ -26,7 +22,6 @@ const CustomerInfo = ({
 
     setIsSubmitting(true); // Set the flag to true to indicate submission in progress
 
-    console.log(orderInfo);
     await addDoc(ordersCollectionRef, orderInfo);
 
     setTimeout(() => {
@@ -47,11 +42,7 @@ const CustomerInfo = ({
     }
 
     gatherAllInfo(e.target.name.value);
-
     setInputError(false);
-
-    // console.log(name);
-
     handleSubmit(e.target.name.value);
   };
 

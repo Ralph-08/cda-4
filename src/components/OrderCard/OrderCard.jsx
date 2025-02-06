@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./OrderCard.scss";
+import React from "react";
 
 const OrderCard = ({
   order,
@@ -7,6 +8,7 @@ const OrderCard = ({
   handleDelivered,
   isDelivered,
   handleFinalizeOrder,
+  isHistory,
 }) => {
   const [cardCollapse, setCardCollapse] = useState(false);
 
@@ -37,19 +39,13 @@ const OrderCard = ({
             <h4 className="order__subhead">Verduras:</h4>
             <ul className="order__list">
               {order.notes.map((note, i) => (
-                <>
+                <React.Fragment key={i}>
                   {note === "pineaple" ? (
-                    <li key={i} className="order__item">
-                      Piña
-                    </li>
+                    <li className="order__item">Piña</li>
                   ) : null}
-
                   {note === "cebolla" ? (
-                    <li key={i} className="order__item">
-                      Cebolla
-                    </li>
+                    <li className="order__item">Cebolla</li>
                   ) : null}
-
                   {note === "cilantro" ? (
                     <li key={i} className="order__item">
                       Cilantro
@@ -60,7 +56,7 @@ const OrderCard = ({
                       (Verduras alado)
                     </li>
                   ) : null}
-                </>
+                </React.Fragment>
               ))}
             </ul>
           </>
@@ -103,23 +99,25 @@ const OrderCard = ({
         <h4>Total: {order.tacoQuantity * 3}$</h4>
       </section>
 
-      <section className="order__right">
-        {!isDelivered ? (
-          <button
-            className="order__button"
-            onClick={handleDeliveredButtonClick}
-          >
-            Entregar
-          </button>
-        ) : (
-          <button
-            className="order__button order__button--blue"
-            onClick={handleFinalizeOrder}
-          >
-            Finalizar
-          </button>
-        )}
-      </section>
+      {!isHistory && (
+        <section className="order__right">
+          {!isDelivered ? (
+            <button
+              className="order__button"
+              onClick={handleDeliveredButtonClick}
+            >
+              Entregar
+            </button>
+          ) : (
+            <button
+              className="order__button order__button--blue"
+              onClick={() => handleFinalizeOrder(order.id)}
+            >
+              Finalizar
+            </button>
+          )}
+        </section>
+      )}
     </section>
   );
 };
