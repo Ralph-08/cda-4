@@ -14,6 +14,7 @@ function Orders() {
       data.docs
         .map((doc) => ({ ...doc.data(), id: doc.id }))
         .filter((order) => !order.orderDelivered)
+        .sort((a, b) => a.orderCreated - b.orderCreated)
     );
   }, [ordersCollectionRef]);
 
@@ -23,7 +24,7 @@ function Orders() {
 
   const handleDelivered = async (id) => {
     const orderDoc = doc(db, "orders", id);
-    const updateField = { orderDelivered: true };
+    const updateField = { orderDelivered: true, orderCreated: Date.now() };
     await updateDoc(orderDoc, updateField);
   };
 

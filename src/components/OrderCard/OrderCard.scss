@@ -25,6 +25,12 @@
   display: flex;
   justify-content: space-between;
 
+  &__date {
+    color: blue;
+    font-weight: bold;
+    text-align: right;
+  }
+
   &--gray {
     background-color: lightgray;
   }
@@ -61,8 +67,28 @@
     color: white;
     border-radius: 0.4rem;
 
-    &--blue {
+    &--coral {
       background-color: coral;
     }
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__total {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  &__total--highlight {
+    color: blue;
   }
 }

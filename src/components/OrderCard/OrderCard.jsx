@@ -20,6 +20,14 @@ const OrderCard = ({
     }, 350);
   };
 
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
     <section
       className={
@@ -34,34 +42,38 @@ const OrderCard = ({
           <b>Cantidad: </b>
           {order.tacoQuantity} taco(s)
         </p>
-        {order.notes.length !== 0 ? (
-          <>
-            <h4 className="order__subhead">Verduras:</h4>
-            <ul className="order__list">
-              {order.notes.map((note, i) => (
-                <React.Fragment key={i}>
-                  {note === "pineaple" ? (
-                    <li className="order__item">Piña</li>
-                  ) : null}
-                  {note === "cebolla" ? (
-                    <li className="order__item">Cebolla</li>
-                  ) : null}
-                  {note === "cilantro" ? (
-                    <li key={i} className="order__item">
-                      Cilantro
-                    </li>
-                  ) : null}
-                  {note === "alado" ? (
-                    <li key={i} className="order__item">
-                      (Verduras alado)
-                    </li>
-                  ) : null}
-                </React.Fragment>
-              ))}
-            </ul>
-          </>
-        ) : (
-          <p className="order__subhead">(No verduras)</p>
+        {!isDelivered && (
+          <section className="order__container">
+            {order.notes.length !== 0 ? (
+              <>
+                <h4 className="order__subhead">Verduras:</h4>
+                <ul className="order__list">
+                  {order.notes.map((note, i) => (
+                    <React.Fragment key={i}>
+                      {note === "pineaple" ? (
+                        <li className="order__item">Piña</li>
+                      ) : null}
+                      {note === "cebolla" ? (
+                        <li className="order__item">Cebolla</li>
+                      ) : null}
+                      {note === "cilantro" ? (
+                        <li key={i} className="order__item">
+                          Cilantro
+                        </li>
+                      ) : null}
+                      {note === "alado" ? (
+                        <li key={i} className="order__item">
+                          (Verduras alado)
+                        </li>
+                      ) : null}
+                    </React.Fragment>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <p className="order__subhead">(No verduras)</p>
+            )}
+          </section>
         )}
         {order.drinksList.length !== 0 ? (
           <>
@@ -96,7 +108,6 @@ const OrderCard = ({
         ) : (
           <p className="order__subhead">(No bebidas)</p>
         )}
-        <h4>Total: {order.tacoQuantity * 3}$</h4>
       </section>
 
       {!isHistory && (
@@ -109,12 +120,28 @@ const OrderCard = ({
               Entregar
             </button>
           ) : (
-            <button
-              className="order__button order__button--blue"
-              onClick={() => handleFinalizeOrder(order.id)}
-            >
-              Finalizar
-            </button>
+            <>
+              <button
+                className="order__button order__button--coral"
+                onClick={() => handleFinalizeOrder(order.id)}
+              >
+                Finalizar
+              </button>
+              <h4 className="order__total">
+                Total:{" "}
+                <span className="order__total--highlight">
+                  {"$" + order.tacoQuantity * 3}
+                </span>
+              </h4>
+            </>
+          )}
+        </section>
+      )}
+      {isHistory && (
+        <section className="order__right">
+          <p className="order__date">{formatDate(order.orderCreated)}</p>
+          {isHistory && (
+            <h4 className="order__total">Total: ${order.tacoQuantity * 3}</h4>
           )}
         </section>
       )}
