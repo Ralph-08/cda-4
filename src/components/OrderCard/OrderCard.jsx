@@ -57,24 +57,12 @@ const OrderCard = ({
                 <h4 className="order__subhead">Verduras:</h4>
                 <ul className="order__list">
                   {order.notes.map((note, i) => (
-                    <React.Fragment key={i}>
-                      {note === "pineaple" ? (
-                        <li className="order__item">Piña</li>
-                      ) : null}
-                      {note === "cebolla" ? (
-                        <li className="order__item">Cebolla</li>
-                      ) : null}
-                      {note === "cilantro" ? (
-                        <li key={i} className="order__item">
-                          Cilantro
-                        </li>
-                      ) : null}
-                      {note === "alado" ? (
-                        <li key={i} className="order__item">
-                          (Verduras alado)
-                        </li>
-                      ) : null}
-                    </React.Fragment>
+                    <li key={i} className="order__item">
+                      {note === "pineaple" && "Piña"}
+                      {note === "cebolla" && "Cebolla"}
+                      {note === "cilantro" && "Cilantro"}
+                      {note === "alado" && "(Verduras alado)"}
+                    </li>
                   ))}
                 </ul>
               </>
@@ -88,28 +76,12 @@ const OrderCard = ({
             <h4 className="order__subhead">Bebidas:</h4>
             <ul className="order__list">
               {order.drinksList.map((drink, i) => (
-                <>
-                  {drink["horchata"] ? (
-                    <li key={i} className="order__item">
-                      {"Horchata: " + drink.horchata}
-                    </li>
-                  ) : null}
-                  {drink["jamaica"] ? (
-                    <li key={i} className="order__item">
-                      {"Jamaica: " + drink.jamaica}
-                    </li>
-                  ) : null}
-                  {drink["coke"] ? (
-                    <li key={i} className="order__item">
-                      {"Coca-Cola: " + drink.coke}
-                    </li>
-                  ) : null}
-                  {drink["sprite"] ? (
-                    <li key={i} className="order__item">
-                      {"Sprite: " + drink.sprite}
-                    </li>
-                  ) : null}
-                </>
+                <li key={i} className="order__item">
+                  {drink["horchata"] && "Horchata: " + drink["horchata"]}
+                  {drink["jamaica"] && "Jamaica: " + drink["jamaica"]}
+                  {drink["coke"] && "Coca-Cola: " + drink["coke"]}
+                  {drink["sprite"] && "Sprite: " + drink["sprite"]}
+                </li>
               ))}
             </ul>
           </>
