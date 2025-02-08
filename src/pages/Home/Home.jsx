@@ -4,8 +4,6 @@ import TacoQuestion from "../TacoQuestion/TacoQuestion";
 import WelcomeScreen from "../WelcomeScreen/WelcomeScreen";
 import DrinksPage from "../DrinksPage/DrinksPage";
 import CustomerInfo from "../CustomerInfo/CustomerInfo";
-import firebase from "firebase/compat/app";
-import { serverTimestamp, Timestamp } from "firebase/firestore";
 
 const Home = () => {
   const [welcomeScreen, setWelcomeScreen] = useState(true);

@@ -3,14 +3,13 @@ import "./EditOrder.scss";
 import { useParams } from "react-router-dom";
 import { db } from "../../firebase-config";
 import { useNavigate } from "react-router-dom";
-import { collection, doc, updateDoc, getDoc } from "firebase/firestore";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const EditOrder = () => {
   const [isLoadingOne, setIsLoadingOne] = useState(true);
   const [isLoadingTwo, setIsLoadingTwo] = useState(false);
   const [order, setOrder] = useState(null);
-  const ordersCollectionRef = collection(db, "orders");
   const { orderId } = useParams();
   const navigate = useNavigate();
 
@@ -19,7 +18,7 @@ const EditOrder = () => {
     const docSnap = await getDoc(docRef);
     setOrder(docSnap.data());
     setIsLoadingOne(false);
-  }, [ordersCollectionRef]);
+  }, [orderId]);
 
   useEffect(() => {
     getOrder();

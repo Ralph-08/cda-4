@@ -23,8 +23,6 @@ const ServerPage = () => {
     getOrders();
   }, [getOrders]);
 
-  const handleEditOrder = (id) => {};
-
   const handleFinalizeOrder = async (id) => {
     const orderDoc = doc(db, "orders", id);
     const updateField = { activeOrder: false, orderCreated: Date.now() };
