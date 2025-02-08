@@ -3,14 +3,12 @@ import "./EditOrder.scss";
 import { useParams } from "react-router-dom";
 import { db } from "../../firebase-config";
 import { useNavigate } from "react-router-dom";
-import {
-  collection,
-  doc,
-  updateDoc,
-  getDoc,
-} from "firebase/firestore";
+import { collection, doc, updateDoc, getDoc } from "firebase/firestore";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const EditOrder = () => {
+  const [isLoadingOne, setIsLoadingOne] = useState(true);
+  const [isLoadingTwo, setIsLoadingTwo] = useState(false);
   const [order, setOrder] = useState(null);
   const ordersCollectionRef = collection(db, "orders");
   const { orderId } = useParams();
@@ -20,13 +18,12 @@ const EditOrder = () => {
     const docRef = doc(db, "orders", orderId);
     const docSnap = await getDoc(docRef);
     setOrder(docSnap.data());
+    setIsLoadingOne(false);
   }, [ordersCollectionRef]);
 
   useEffect(() => {
     getOrder();
   }, [getOrder]);
-
-  if (!order) return;
 
   const handleCancel = () => {
     navigate("/ordenes-activas");
@@ -43,6 +40,8 @@ const EditOrder = () => {
   };
 
   const handleConfirmOrderEdit = async (changedValues) => {
+    setIsLoadingTwo(true);
+
     let tacoObject = false;
     let updatedDrinksList = order.drinksList.map((drink) => {
       const drinkKey = Object.keys(drink)[0];
@@ -86,6 +85,10 @@ const EditOrder = () => {
     }
     handleConfirmOrderEdit(changedValues);
   };
+
+  if (isLoadingOne || isLoadingTwo) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <section className="edit">
