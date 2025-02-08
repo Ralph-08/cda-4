@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./OrderCard.scss";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const OrderCard = ({
   order,
@@ -20,6 +21,22 @@ const OrderCard = ({
     }, 350);
   };
 
+  const handleFinalizeOrderButtonClick = () => {
+    setCardCollapse(true);
+
+    setTimeout(() => {
+      handleFinalizeOrder(order.id);
+    }, 350);
+  };
+
+  const formatDate = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
     <section
       className={
@@ -34,69 +51,44 @@ const OrderCard = ({
           <b>Cantidad: </b>
           {order.tacoQuantity} taco(s)
         </p>
-        {order.notes.length !== 0 ? (
-          <>
-            <h4 className="order__subhead">Verduras:</h4>
-            <ul className="order__list">
-              {order.notes.map((note, i) => (
-                <React.Fragment key={i}>
-                  {note === "pineaple" ? (
-                    <li className="order__item">Piña</li>
-                  ) : null}
-                  {note === "cebolla" ? (
-                    <li className="order__item">Cebolla</li>
-                  ) : null}
-                  {note === "cilantro" ? (
+        {!isDelivered && (
+          <section className="order__container">
+            {order.notes.length !== 0 ? (
+              <>
+                <h4 className="order__subhead">Verduras:</h4>
+                <ul className="order__list">
+                  {order.notes.map((note, i) => (
                     <li key={i} className="order__item">
-                      Cilantro
+                      {note === "pineaple" && "Piña"}
+                      {note === "cebolla" && "Cebolla"}
+                      {note === "cilantro" && "Cilantro"}
+                      {note === "alado" && "(Verduras alado)"}
                     </li>
-                  ) : null}
-                  {note === "alado" ? (
-                    <li key={i} className="order__item">
-                      (Verduras alado)
-                    </li>
-                  ) : null}
-                </React.Fragment>
-              ))}
-            </ul>
-          </>
-        ) : (
-          <p className="order__subhead">(No verduras)</p>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <p className="order__subhead">(No verduras)</p>
+            )}
+          </section>
         )}
         {order.drinksList.length !== 0 ? (
           <>
             <h4 className="order__subhead">Bebidas:</h4>
             <ul className="order__list">
               {order.drinksList.map((drink, i) => (
-                <>
-                  {drink["horchata"] ? (
-                    <li key={i} className="order__item">
-                      {"Horchata: " + drink.horchata}
-                    </li>
-                  ) : null}
-                  {drink["jamaica"] ? (
-                    <li key={i} className="order__item">
-                      {"Jamaica: " + drink.jamaica}
-                    </li>
-                  ) : null}
-                  {drink["coke"] ? (
-                    <li key={i} className="order__item">
-                      {"Coca-Cola: " + drink.coke}
-                    </li>
-                  ) : null}
-                  {drink["sprite"] ? (
-                    <li key={i} className="order__item">
-                      {"Sprite: " + drink.sprite}
-                    </li>
-                  ) : null}
-                </>
+                <li key={i} className="order__item">
+                  {drink["horchata"] && "Horchata: " + drink["horchata"]}
+                  {drink["jamaica"] && "Jamaica: " + drink["jamaica"]}
+                  {drink["coke"] && "Coca-Cola: " + drink["coke"]}
+                  {drink["sprite"] && "Sprite: " + drink["sprite"]}
+                </li>
               ))}
             </ul>
           </>
         ) : (
           <p className="order__subhead">(No bebidas)</p>
         )}
-        <h4>Total: {order.tacoQuantity * 3}$</h4>
       </section>
 
       {!isHistory && (
@@ -109,12 +101,33 @@ const OrderCard = ({
               Entregar
             </button>
           ) : (
-            <button
-              className="order__button order__button--blue"
-              onClick={() => handleFinalizeOrder(order.id)}
-            >
-              Finalizar
-            </button>
+            <>
+              <section className="order__right-container">
+                <button
+                  className="order__button order__button--coral"
+                  onClick={handleFinalizeOrderButtonClick}
+                >
+                  Finalizar
+                </button>
+                <Link className="order__add" to={"/ordenes-activas" + order.id}>
+                  +
+                </Link>
+              </section>
+              <h4 className="order__total">
+                Total:{" "}
+                <span className="order__total--highlight">
+                  {"$" + order.tacoQuantity * 3}
+                </span>
+              </h4>
+            </>
+          )}
+        </section>
+      )}
+      {isHistory && (
+        <section className="order__right">
+          <p className="order__date">{formatDate(order.orderCreated)}</p>
+          {isHistory && (
+            <h4 className="order__total">Total: ${order.tacoQuantity * 3}</h4>
           )}
         </section>
       )}

@@ -4,7 +4,7 @@ import { db } from "../../firebase-config";
 import { collection, getDocs, updateDoc, doc } from "firebase/firestore";
 import OrderCard from "../../components/OrderCard/OrderCard";
 
-function Orders() {
+const Orders = () => {
   const [orders, setOrders] = useState([]);
   const ordersCollectionRef = collection(db, "orders");
 
@@ -14,6 +14,7 @@ function Orders() {
       data.docs
         .map((doc) => ({ ...doc.data(), id: doc.id }))
         .filter((order) => !order.orderDelivered)
+        .sort((a, b) => a.orderCreated - b.orderCreated)
     );
   }, [ordersCollectionRef]);
 
@@ -23,7 +24,7 @@ function Orders() {
 
   const handleDelivered = async (id) => {
     const orderDoc = doc(db, "orders", id);
-    const updateField = { orderDelivered: true };
+    const updateField = { orderDelivered: true, orderCreated: Date.now() };
     await updateDoc(orderDoc, updateField);
   };
 
@@ -44,6 +45,6 @@ function Orders() {
       </section>
     </>
   );
-}
+};
 
 export default Orders;

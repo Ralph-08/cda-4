@@ -1,11 +1,10 @@
+import "./partials/App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Warehouse from "./pages/Warehouse";
-import Inventory from "./pages/Inventory";
 import Home from "./pages/Home/Home";
-import ServerPage from "./pages/ServerPage/ServerPage";
+import ActiveOrders from "./pages/ActiveOrders/ActiveOrders";
 import OrderHistory from "./pages/OrderHistory/OrderHistory";
-import "./App.scss";
 import Orders from "./pages/Orders/Orders";
+import EditOrder from "./pages/EditOrder/EditOrder";
 
 function App() {
   return (
@@ -14,10 +13,9 @@ function App() {
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"/ordenes"} element={<Orders />} />
-          <Route path={"/server-page"} element={<ServerPage />} />
+          <Route path={"/ordenes-activas"} element={<ActiveOrders />} />
+          <Route path={"/ordenes-activas:orderId"} element={<EditOrder />} />
           <Route path={"/order-history"} element={<OrderHistory />} />
-          <Route path={"warehouses"} element={<Warehouse />} />
-          <Route path={"inventory"} element={<Inventory />} />
         </Routes>
       </div>
     </BrowserRouter>

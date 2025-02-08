@@ -25,6 +25,12 @@
   display: flex;
   justify-content: space-between;
 
+  &__date {
+    color: blue;
+    font-weight: bold;
+    text-align: right;
+  }
+
   &--gray {
     background-color: lightgray;
   }
@@ -55,14 +61,46 @@
 
   &__button {
     border-style: none;
-    font-size: 1.5rem;
-    padding: 1rem;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
     background-color: rgb(2, 194, 53);
     color: white;
     border-radius: 0.4rem;
 
-    &--blue {
+    &--coral {
       background-color: coral;
     }
+  }
+
+  &__add {
+    border-style: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: rgb(2, 194, 53);
+    color: white;
+    border-radius: 0.4rem;
+    margin-left: 1rem;
+    text-decoration: none;
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  &__total {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  &__total--highlight {
+    color: blue;
   }
 }

@@ -15,6 +15,7 @@ const OrderHistory = () => {
       data.docs
         .map((doc) => ({ ...doc.data(), id: doc.id }))
         .filter((order) => !order.activeOrder)
+        .sort((a, b) => b.orderCreated - a.orderCreated)
     );
   }, [ordersCollectionRef]);
 
@@ -24,20 +25,13 @@ const OrderHistory = () => {
 
   return (
     <section className="history">
-      <NavLink to="/server-page" className="history__link">
+      <NavLink to="/ordenes-activas" className="history__link">
         {"< Regresar"}
       </NavLink>
       <h1 className="history__header">Historial</h1>
 
       {orders.map((order, i) => {
-        return (
-          <OrderCard
-            order={order}
-            key={i}
-            index={i}
-            isHistory={true}
-          />
-        );
+        return <OrderCard order={order} key={i} index={i} isHistory={true} />;
       })}
     </section>
   );
