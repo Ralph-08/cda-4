@@ -5,8 +5,10 @@ import walkingTaco from "../../assets/images/walking-taco.gif";
 
 import { db } from "../../firebase-config";
 import { collection, addDoc } from "firebase/firestore";
+import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
 
 const CustomerInfo = ({ handleBackPage, gatherAllInfo, orderInfo }) => {
+  const [isLoding, setIsLoading] = useState(false);
   const [inputError, setInputError] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false); // Add a state to track submission status
@@ -18,13 +20,15 @@ const CustomerInfo = ({ handleBackPage, gatherAllInfo, orderInfo }) => {
   };
 
   const handleSubmit = async () => {
-    if (isSubmitting) return; // Prevent multiple submissions
+    if (!orderInfo.name) return;
 
-    setIsSubmitting(true); // Set the flag to true to indicate submission in progress
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
     await addDoc(ordersCollectionRef, orderInfo);
 
     setTimeout(() => {
+      setIsLoading(false);
       setSubmitSuccess(true);
     }, 100);
 
@@ -41,10 +45,14 @@ const CustomerInfo = ({ handleBackPage, gatherAllInfo, orderInfo }) => {
       return;
     }
 
+    setIsLoading(true);
+
     gatherAllInfo(e.target.name.value);
     setInputError(false);
     handleSubmit(e.target.name.value);
   };
+
+  if (isLoding) return <LoadingSpinner />;
 
   return (
     <section className="info">

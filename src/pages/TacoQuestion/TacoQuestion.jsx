@@ -45,6 +45,7 @@ const TacoQuestion = ({ handleNextPage }) => {
       <img src={tacosImage} className="survey__image" alt="taco" />
       <Counter quantity={quantity} setQuantity={setQuantity} />
 
+      <p className="survey__subhead">Seleccione sus verduras:</p>
       <section className="survey__options">
         <button
           className={`options__button ${
