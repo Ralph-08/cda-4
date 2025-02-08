@@ -19,7 +19,12 @@ const Home = () => {
   });
 
   const gatherAllInfo = (name) => {
-    setOrderInfo({ ...orderInfo, name: name, orderCreated: Date.now() });
+    setOrderInfo({
+      ...orderInfo,
+      name: name,
+      orderCreated: Date.now(),
+      tableNumber: 0,
+    });
   };
 
   const handleNextPageToTwo = (notesList, quantity) => {

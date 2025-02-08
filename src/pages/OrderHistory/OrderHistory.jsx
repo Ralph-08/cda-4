@@ -25,7 +25,7 @@ const OrderHistory = () => {
 
   return (
     <section className="history">
-      <NavLink to="/server-page" className="history__link">
+      <NavLink to="/ordenes-activas" className="history__link">
         {"< Regresar"}
       </NavLink>
       <h1 className="history__header">Historial</h1>

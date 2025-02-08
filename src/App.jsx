@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import ActiveOrders from "./pages/ActiveOrders/ActiveOrders";
 import OrderHistory from "./pages/OrderHistory/OrderHistory";
 import Orders from "./pages/Orders/Orders";
+import EditOrder from "./pages/EditOrder/EditOrder";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path={"/"} element={<Home />} />
           <Route path={"/ordenes"} element={<Orders />} />
           <Route path={"/ordenes-activas"} element={<ActiveOrders />} />
+          <Route path={"/ordenes-activas:orderId"} element={<EditOrder />} />
           <Route path={"/order-history"} element={<OrderHistory />} />
         </Routes>
       </div>

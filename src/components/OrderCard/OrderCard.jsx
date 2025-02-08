@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./OrderCard.scss";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const OrderCard = ({
   order,
@@ -101,12 +102,17 @@ const OrderCard = ({
             </button>
           ) : (
             <>
-              <button
-                className="order__button order__button--coral"
-                onClick={handleFinalizeOrderButtonClick}
-              >
-                Finalizar
-              </button>
+              <section className="order__right-container">
+                <button
+                  className="order__button order__button--coral"
+                  onClick={handleFinalizeOrderButtonClick}
+                >
+                  Finalizar
+                </button>
+                <Link className="order__add" to={"/ordenes-activas" + order.id}>
+                  +
+                </Link>
+              </section>
               <h4 className="order__total">
                 Total:{" "}
                 <span className="order__total--highlight">
