@@ -5,7 +5,6 @@ import { db } from "../../firebase-config";
 import { useNavigate } from "react-router-dom";
 import {
   collection,
-  getDocs,
   doc,
   updateDoc,
   getDoc,
@@ -20,7 +19,7 @@ const EditOrder = () => {
   const getOrder = useCallback(async () => {
     const docRef = doc(db, "orders", orderId);
     const docSnap = await getDoc(docRef);
-    setOrder(docSnap._document.data.value.mapValue.fields);
+    setOrder(docSnap.data());
   }, [ordersCollectionRef]);
 
   useEffect(() => {
@@ -29,22 +28,51 @@ const EditOrder = () => {
 
   if (!order) return;
 
-  const arrayValues = order.drinksList.arrayValue.values;
-
   const handleCancel = () => {
     navigate("/ordenes-activas");
   };
 
-  const handleConfirmOrderEdit = async (changedValues) => {
+  const handleTacoQuantityUpdate = async (obj) => {
     const orderDoc = doc(db, "orders", orderId);
-    // const updateField = { activeOrder: false, orderCreated: Date.now() };
-    await updateDoc(orderDoc, changedValues);
+    await updateDoc(orderDoc, obj);
   };
 
-  //   console.log(order.tacoQuantity.integerValue)
-  // console.log(order.drinksList.arrayValue.values[0].mapValue.fields.horchata.integerValue)
+  const handleDrinksQuantityUpdate = async (updatedDrinksList) => {
+    const orderDoc = doc(db, "orders", orderId);
+    await updateDoc(orderDoc, { drinksList: updatedDrinksList });
+  };
 
-  //   make if statement where if key === tacoqty then... else order[...].value
+  const handleConfirmOrderEdit = async (changedValues) => {
+    let tacoObject = false;
+    let updatedDrinksList = order.drinksList.map((drink) => {
+      const drinkKey = Object.keys(drink)[0];
+      if (changedValues[drinkKey]) {
+        return {
+          [drinkKey]: Number(changedValues[drinkKey]) + drink[drinkKey],
+        };
+      }
+      return drink;
+    });
+
+    Object.entries(changedValues).forEach(([key, value]) => {
+      if (key === "tacoQuantity") {
+        tacoObject = {
+          ...tacoObject,
+          tacoQuantity: Number(value) + order.tacoQuantity,
+        };
+      }
+    });
+
+    if (tacoObject) {
+      await handleTacoQuantityUpdate(tacoObject);
+    }
+
+    if (updatedDrinksList.length > 0) {
+      await handleDrinksQuantityUpdate(updatedDrinksList);
+    }
+
+    navigate("/ordenes-activas");
+  };
 
   const verifyFormInputs = (e) => {
     e.preventDefault();
@@ -54,30 +82,24 @@ const EditOrder = () => {
     for (let [key, value] of formData.entries()) {
       if (value !== "0" && value !== "") {
         changedValues[key] = Number(value);
-        console.log(key);
       }
     }
-
-    // handleConfirmOrderEdit(changedValues);
+    handleConfirmOrderEdit(changedValues);
   };
 
   return (
     <section className="edit">
-      <h1 className="edit__name">{order.name.stringValue}</h1>
+      <h1 className="edit__name">{order.name}</h1>
       <h3 className="edit__tableNumber">
         <b>Mesa #: </b>
-        <button className="edit__table-button">
-          {order.tableNumber.integerValue}
-        </button>
+        <button className="edit__table-button">{order.tableNumber}</button>
       </h3>
 
       <form className="edit__form" onSubmit={verifyFormInputs}>
         <section className="edit__taco-container">
           <h3 className="edit__qty">
             <b>Tacos:</b>{" "}
-            <span className="quantity__highlight">
-              {order.tacoQuantity.integerValue}
-            </span>{" "}
+            <span className="quantity__highlight">{order.tacoQuantity}</span>{" "}
           </h3>
           <section className="edit__taco-qty-container">
             <h1 className="edit__plus-icon">+</h1>
@@ -89,39 +111,40 @@ const EditOrder = () => {
           </section>
         </section>
         <section className="edit__drinks-container">
-          {arrayValues.map((drink, i) => {
-            const fields = arrayValues[i].mapValue.fields;
-            const drinkTypes = ["horchata", "jamaica", "coke", "sprite"];
+          {order.drinksList.map((drink, i) => {
+            let drinkKey;
+            let drinkValue;
 
-            for (const drink of drinkTypes) {
-              if (fields[drink]) {
-                return (
-                  <section
-                    key={i}
-                    className={
-                      i % 2
-                        ? "edit__single-container"
-                        : "edit__single-container edit__single-container--gray"
-                    }
-                  >
-                    <h3 key={i} className="edit__qty">
-                      <b>{drink.charAt(0).toUpperCase() + drink.slice(1)}</b>
-                      <span className="quantity__highlight">
-                        {": " + fields[drink].integerValue}
-                      </span>{" "}
-                    </h3>
-                    <section className="edit__taco-qty-container">
-                      <h1 className="edit__plus-icon">+</h1>
-                      <input
-                        className="edit__input"
-                        name={drink}
-                        inputMode="decimal"
-                      />
-                    </section>
-                  </section>
-                );
-              }
-            }
+            Object.entries(drink).forEach(([key, value]) => {
+              drinkKey = key;
+              drinkValue = value;
+            });
+
+            return (
+              <section
+                key={i}
+                className={
+                  i % 2
+                    ? "edit__single-container"
+                    : "edit__single-container edit__single-container--gray"
+                }
+              >
+                <h3 key={i} className="edit__qty">
+                  <b>{drinkKey.charAt(0).toUpperCase() + drinkKey.slice(1)}</b>
+                  <span className="quantity__highlight">
+                    {": " + drinkValue}
+                  </span>{" "}
+                </h3>
+                <section className="edit__taco-qty-container">
+                  <h1 className="edit__plus-icon">+</h1>
+                  <input
+                    className="edit__input"
+                    name={drinkKey}
+                    inputMode="decimal"
+                  />
+                </section>
+              </section>
+            );
           })}
         </section>
 
