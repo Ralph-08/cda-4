@@ -1,0 +1,62 @@
+@keyframes pulse {
+  0% {
+    text-shadow: 0 0 10px green;
+  }
+  100% {
+    text-shadow: 0 0 30px rgb(255, 255, 255);
+  }
+}
+
+.list {
+  display: flex;
+  height: 100vh;
+
+  &__left {
+    width: 50%;
+    padding: 0 2rem;
+  }
+
+  &__header {
+    font-size: 1.8rem;
+  }
+
+  &__customers {
+    list-style: none;
+    padding: 0;
+  }
+
+  &__customer {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .customer__pulse {
+    color: green;
+    font-weight: bolder;
+    animation: pulse 1s infinite;
+  }
+
+  &__right {
+    width: 50%;
+    display: flex;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: url("../../assets/images/tacos.jpg") center/cover no-repeat,
+      rgba(0, 0, 0, 0.516);
+    background-blend-mode: multiply;
+  }
+
+  &__subheader {
+    color: white;
+    font-size: 3rem;
+    width: 15rem;
+    text-align: center;
+  }
+
+  &__qr-code {
+    width: 15rem;
+    border-radius: 1rem;
+  }
+}
