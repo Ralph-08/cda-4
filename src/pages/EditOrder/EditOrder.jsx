@@ -91,7 +91,9 @@ const EditOrder = () => {
 
   return (
     <section className="edit">
-      <h1 className="edit__name">{order.name}</h1>
+      <h1 className="edit__name">
+        {order.name.charAt(0).toUpperCase() + order.name.slice(1)}
+      </h1>
       <h3 className="edit__tableNumber">
         <b>Mesa #: </b>
         <button className="edit__table-button">{order.tableNumber}</button>

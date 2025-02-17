@@ -8,8 +8,9 @@ const OrderCard = ({
   index,
   handleDelivered,
   isDelivered,
-  handleFinalizeOrder,
+  setCurrentOrder,
   isHistory,
+  setFinalizePopUp,
 }) => {
   const [cardCollapse, setCardCollapse] = useState(false);
 
@@ -22,11 +23,11 @@ const OrderCard = ({
   };
 
   const handleFinalizeOrderButtonClick = () => {
-    setCardCollapse(true);
-
-    setTimeout(() => {
-      handleFinalizeOrder(order.id);
-    }, 350);
+    setCurrentOrder({
+      orderId: order.id,
+      name: order.name.charAt(0).toUpperCase() + order.name.slice(1),
+    });
+    setFinalizePopUp(true);
   };
 
   const formatDate = (timestamp) => {

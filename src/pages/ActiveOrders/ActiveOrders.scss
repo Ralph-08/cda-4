@@ -21,3 +21,66 @@
     border-radius: 0.5rem;
   }
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.popUp {
+  background-color: rgba(0, 0, 0, 0.544);
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.2s;
+  z-index: 2;
+
+  &__card {
+    border-radius: 1rem;
+    background-color: white;
+    width: 80%;
+    height: 50%;
+    max-width: 400px;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  &__header {
+    font-size: 2rem;
+  }
+
+  &__bottom-section {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  &__button {
+    // padding: .5rem 3rem;
+    width: 50%;
+    border-style: none;
+    font-size: 1rem;
+    padding: 0.8rem 0;
+    border-radius: 1rem;
+    color: white;
+
+    &--no {
+      background-color: rgb(255, 80, 80);
+    }
+
+    &--yes {
+      background-color: green;
+    }
+  }
+}
