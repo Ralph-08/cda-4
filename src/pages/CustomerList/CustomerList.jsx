@@ -41,7 +41,7 @@ const CustomerList = () => {
         </ul>
       </section>
       <section className="list__right">
-        <h2 className="list__subheader">Scanee Para Ordernar!</h2>
+        <h2 className="list__subheader">Escanee Para Ordernar!</h2>
         <img className="list__qr-code" src={qrCode} alt="QR Code" />
       </section>
     </section>
