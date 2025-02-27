@@ -38,6 +38,27 @@ const OrderCard = ({
     });
   };
 
+  const calculateTotal = () => {
+    let total = order.tacoQuantity * 3;
+
+    order.drinksList.forEach((drink) => {
+      if (drink["coke"]) {
+        total += drink["coke"] * 2.5;
+      }
+      if (drink["sprite"]) {
+        total += drink["sprite"] * 2.5;
+      }
+      if (drink["horchata"]) {
+        total += drink["horchata"] * 6;
+      }
+      if (drink["jamaica"]) {
+        total += drink["jamaica"] * 6;
+      }
+    });
+
+    return total;
+  };
+
   return (
     <section
       className={
@@ -117,7 +138,7 @@ const OrderCard = ({
               <h4 className="order__total">
                 Total:{" "}
                 <span className="order__total--highlight">
-                  {"$" + order.tacoQuantity * 3}
+                  {"$" + calculateTotal()}
                 </span>
               </h4>
             </>
@@ -128,7 +149,7 @@ const OrderCard = ({
         <section className="order__right">
           <p className="order__date">{formatDate(order.orderCreated)}</p>
           {isHistory && (
-            <h4 className="order__total">Total: ${order.tacoQuantity * 3}</h4>
+            <h4 className="order__total">Total: ${calculateTotal()}</h4>
           )}
         </section>
       )}
