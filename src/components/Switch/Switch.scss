@@ -1,0 +1,73 @@
+@keyframes offAnimate {
+  0% {
+    left: 36px;
+  }
+  100% {
+    left: 4px;
+  }
+}
+
+@keyframes onAnimate {
+  0% {
+    left: 4px;
+  }
+
+  100% {
+    left: 36px;
+  }
+}
+
+@keyframes bgToGreen {
+  from {
+    background-color: darkgrey;
+  }
+  to {
+    background-color: green;
+  }
+}
+@keyframes bgToGrey {
+  from {
+    background-color: green;
+  }
+  to {
+    background-color: darkgrey;
+  }
+}
+
+.switch {
+  width: 72px;
+  height: 2.5rem;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  border-radius: 2rem;
+  border-style: none;
+  padding: 0;
+  margin: 0.3rem;
+
+  &--off {
+    animation: bgToGrey 0.3s;
+    background-color: darkgrey;
+  }
+
+  &--on {
+    animation: bgToGreen 0.3s;
+    background-color: green;
+  }
+
+  &__button {
+    height: 2rem;
+    width: 2rem;
+    position: relative;
+    left: 4px;
+    border-radius: 5rem;
+    border-style: none;
+    background-color: white;
+    animation: offAnimate 0.3s;
+
+    &--on {
+      left: 36px;
+      animation: onAnimate 0.3s;
+    }
+  }
+}

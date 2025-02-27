@@ -6,6 +6,7 @@ import OrderHistory from "./pages/OrderHistory/OrderHistory";
 import Orders from "./pages/Orders/Orders";
 import EditOrder from "./pages/EditOrder/EditOrder";
 import CustomerList from "./pages/CustomerList/CustomerList";
+import Products from "./pages/Products/Products";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/ordenes-activas" element={<ActiveOrders />} />
           <Route path="/ordenes-activas:orderId" element={<EditOrder />} />
           <Route path="/order-history" element={<OrderHistory />} />
+          <Route path="/productos" element={<Products />} />
           <Route path="/lista" element={<CustomerList />} />
         </Routes>
       </div>
