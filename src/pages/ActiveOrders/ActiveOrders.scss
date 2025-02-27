@@ -20,6 +20,9 @@
     padding: 0.3rem 0.5rem;
     border-radius: 0.5rem;
   }
+  &__menu-icon {
+    width: 2rem;
+  }
 }
 
 @keyframes fadeIn {
@@ -67,7 +70,6 @@
   }
 
   &__button {
-    // padding: .5rem 3rem;
     width: 50%;
     border-style: none;
     font-size: 1rem;

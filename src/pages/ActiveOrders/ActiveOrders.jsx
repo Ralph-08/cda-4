@@ -3,8 +3,9 @@ import { useState, useEffect, useCallback } from "react";
 import { db } from "../../firebase-config";
 import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
 import OrderCard from "../../components/OrderCard/OrderCard";
-import { NavLink } from "react-router-dom";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
+import menuIcon from "../../assets/icons/menu-icon.svg";
+import SideMenu from "../../components/SideMenu/SideMenu";
 
 const ServerPage = () => {
   const [orders, setOrders] = useState([]);
@@ -12,6 +13,9 @@ const ServerPage = () => {
   const [finalizePopUp, setFinalizePopUp] = useState(false);
   const [currentOrder, setCurrentOrder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // -----------------
+  const [showMenu, setShowMenu] = useState(false);
 
   const getOrders = useCallback(async () => {
     const data = await getDocs(ordersCollectionRef);
@@ -46,9 +50,11 @@ const ServerPage = () => {
       <section className="server-page">
         <section className="server-page__header">
           <h1>Por Cobrar</h1>
-          <NavLink to="/order-history" className="server-page__link">
-            Historial
-          </NavLink>
+          <img
+            onClick={() => setShowMenu(true)}
+            src={menuIcon}
+            className="server-page__menu-icon"
+          />
         </section>
 
         {orders.map((order, i) => {
@@ -91,6 +97,8 @@ const ServerPage = () => {
           </section>
         </section>
       )}
+
+      {showMenu && <SideMenu setShowMenu={setShowMenu} />}
     </>
   );
 };
