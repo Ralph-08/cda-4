@@ -179,11 +179,6 @@ const OrderCard = ({
                 : calculateTotal()}
             </h4>
           )}
-
-          {/* {
-            console.log(calculateTotal().toString().split("").find((i) => i === "."))
-            
-          } */}
         </section>
       )}
     </section>
