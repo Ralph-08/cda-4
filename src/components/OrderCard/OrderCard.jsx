@@ -54,6 +54,15 @@ const OrderCard = ({
       if (drink["jamaica"]) {
         total += drink["jamaica"] * 6;
       }
+      if (drink["pineapple"]) {
+        total += drink["pineapple"] * 6;
+      }
+      if (drink["tamarindo"]) {
+        total += drink["tamarindo"] * 6;
+      }
+      if (drink["melon"]) {
+        total += drink["melon"] * 6;
+      }
     });
 
     return total;
@@ -104,6 +113,10 @@ const OrderCard = ({
                   {drink["jamaica"] && "Jamaica: " + drink["jamaica"]}
                   {drink["coke"] && "Coca-Cola: " + drink["coke"]}
                   {drink["sprite"] && "Sprite: " + drink["sprite"]}
+                  {drink["pineapple"] && "Agua de Piña: " + drink["pineapple"]}
+                  {drink["tamarindo"] &&
+                    "Agua de Tamarindo: " + drink["tamarindo"]}
+                  {drink["melon"] && "Agua de Melon: " + drink["melon"]}
                 </li>
               ))}
             </ul>
@@ -138,7 +151,14 @@ const OrderCard = ({
               <h4 className="order__total">
                 Total:{" "}
                 <span className="order__total--highlight">
-                  {"$" + calculateTotal()}
+                  {`$${
+                    calculateTotal()
+                      .toString()
+                      .split("")
+                      .find((i) => i === ".")
+                      ? calculateTotal() + "0"
+                      : calculateTotal()
+                  }`}
                 </span>
               </h4>
             </>
@@ -149,8 +169,21 @@ const OrderCard = ({
         <section className="order__right">
           <p className="order__date">{formatDate(order.orderCreated)}</p>
           {isHistory && (
-            <h4 className="order__total">Total: ${calculateTotal()}</h4>
+            <h4 className="order__total">
+              Total: $
+              {calculateTotal()
+                .toString()
+                .split("")
+                .find((i) => i === ".")
+                ? calculateTotal() + "0"
+                : calculateTotal()}
+            </h4>
           )}
+
+          {/* {
+            console.log(calculateTotal().toString().split("").find((i) => i === "."))
+            
+          } */}
         </section>
       )}
     </section>
